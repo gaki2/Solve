@@ -2,7 +2,7 @@
 #include <vector>
 #include <string> 
 #include <algorithm> // sort 함수가 있음
-
+#include <cstring>
 using namespace std;
 
 int		N;
@@ -10,7 +10,7 @@ int		N;
 bool	tool(string a, string b)
 {
 	if (a.length() == b.length())
-		return (a < b);
+		return (strcmp(a.c_str(), b.c_str()) < 0);
 	else
 		return (a.length() < b.length());
 }
@@ -32,9 +32,3 @@ int		main(void)
 		cout << words[i] << '\n';
 	return (0);
 }
-
-
-	
-
-
-	
