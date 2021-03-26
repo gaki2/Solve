@@ -2,23 +2,20 @@
 #include <iostream>
 #include <algorithm>
 #include <math.h>
-typedef long long ll;
+//typedef long long	ll;
+#define ll long long
 using namespace std;
 
 int N, M, K;
 vector<ll> set;
 vector<ll> tree;
-
-void	change(int node, int start, int end, int index, ll diff)
+//틀린이유: tree size 잴 때(1 << (int)ceil(log2(N)) + 1) 인데 맨 뒤에 +1 빼먹음 ..
+void	change(int index, ll diff) //인덱스 트리 방법으로 하면 수정이 많을때 편함.
 {
-	if (start > index || index > end)
-		return ;
-	tree[node] += diff;
-	if (start != end)
+	while (index > 0)
 	{
-		int		mid = (start + end) / 2;
-		change(node * 2, start, mid, index, diff);
-		change(node * 2 + 1, mid + 1, end, index, diff);
+		tree[index] += diff;
+		index /= 2;
 	}
 }
 
@@ -53,9 +50,10 @@ int		main(void)
 		cin >> temp;
 		set.push_back(temp);
 	}
-	int		size = (1 << (int)ceil(log2(N)));
+	int		size = (1 << (int)(ceil(log2(N)) + 1));
 	tree.resize(size);
 	make_tree(1, 0, N - 1);
+
 	for (int i = 0; i < M + K; i++)
 	{
 		int		option;

@@ -51,18 +51,18 @@ int		go_map(int row, int col)
 			int		new_col = point.second + x_move[i];
 			if (new_row < 0 || new_row >= N || new_col < 0 || new_col >= M)
 				continue;
-			if (visit[new_row][new_col][wall] == 0 && map[new_row][new_col] == '0')
+			if (!visit[new_row][new_col][wall] && map[new_row][new_col] == '0')
 			{
 				visit[new_row][new_col][wall] = 1;
 				q.push(make_pair(make_pair(new_row, new_col), cnt + 1));
 				w.push(wall);
 			}
-			else if (visit[new_row][new_col][wall] == 0 && map[new_row][new_col] == '1' && wall)
+			else if (!visit[new_row][new_col][wall] && map[new_row][new_col] == '1' && wall)
 			{
-				wall = 0;
 				visit[new_row][new_col][wall] = 1;
+				visit[new_row][new_col][0] = 1;
 				q.push(make_pair(make_pair(new_row, new_col), cnt + 1));
-				w.push(wall);
+				w.push(0);
 			}
 		}
 	}
