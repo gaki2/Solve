@@ -2,17 +2,22 @@
 #include <algorithm>
 #include <math.h>
 #include <vector>
+#include <string>
 using namespace std;
 
 int		main(void)
 {
-	int		a;
-	int		b;
+	vector<string> v;
+	vector<string> v2;
+	string a;
 
-	a = ceil(log2(8));
-	printf("a:%d\n", a);
-	b = (1 << (a + 1));
-	printf("b:%d\n", b);
+	cin >> a;
+	v.push_back(a);
+	v2 = v;
+	v2[0][0] = 'z';
+	v2[0][1] = 'o';
+	cout << v[0] << '\n';
+	cout << v2[0] << '\n';
 	return (0);
 }
 
