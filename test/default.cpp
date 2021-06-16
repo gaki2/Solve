@@ -3,10 +3,14 @@
 #include <string>
 #include <algorithm>
 #include <cmath>
+#include <stack>
 using namespace std;
 
 
 int		main(void)
 {
-	ios::sync_with_stdio(0);
+	stack<int> s;
+	s.push(1);
+	s.push(2);
+	cout << s[1] << endl;
 }
