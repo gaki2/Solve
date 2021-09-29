@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-
+#include <iostream>
 using namespace std;
 
 struct s_point
@@ -80,10 +80,12 @@ void cycle(s_point s, s_point now)
     int now_col = now.col;
     int now_di = now.di;
 
-    if (visited[now_row][now_col][now_di] == 1)
+        s_point temp = changeDi(now);
+    if (visited[temp.row][temp.col][temp.di] == 1)
         return;
-    s_point temp = changeDi(now);
     visited[temp.row][temp.col][temp.di] = 1;
+    // cout << "s "<< s.row << " " << s.col << " " << s.di << endl;
+    // cout << "temp "<< temp.row << " " << temp.col << " " << temp.di << endl;
     if (temp.row == s.row && temp.col == s.col && temp.di == s.di)
     {
         answer.push_back(temp.cnt);
@@ -97,7 +99,6 @@ vector<int> solution(vector<string> grid)
     n = grid.size();
     m = grid[0].length();
     Board = grid;
-
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -105,7 +106,7 @@ vector<int> solution(vector<string> grid)
             for (int k = 0; k < 4; k++)
             {
                 s_point s = {i, j, k, 0};
-                s_point now = {i, j, k, 1};
+                s_point now = {i, j, k, 0};
                 cycle(s, now);
             }
         }
