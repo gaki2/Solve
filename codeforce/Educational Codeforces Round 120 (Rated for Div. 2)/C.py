@@ -1,17 +1,28 @@
+import copy
+from collections import deque
 t = int(input())
-ret = []
 
+cnt = 0
+ret = 0
 for _ in range(t):
     n, k = map(int, input().split())
-    sequence = list(map(int, input().split(' ')))
-    sequence.sort()
-    cnt = 0
-
-    while(sequence[0] * n > k):
-        cnt += 1
-        sequence[0] = sequence[0] - 1
-
-    ret.append(cnt)
-
-for r in ret:
-    print(r)
+    array = list(map(int, input().split()))
+    queue = deque()
+    queue.append((cnt, array))
+    while(queue):
+        nowItem = queue.popleft()
+        nowCnt, nowArr = nowItem
+        if (sum(nowArr) <= k):
+            ret = nowCnt
+            break
+        nowArr.sort()
+        for i in range(2):
+            if (i == 0):  # set
+                newArr = copy.deepcopy(nowArr)
+                newArr[-1] = newArr[0]
+                queue.append((nowCnt + 1, newArr))
+            if (i == 1):  # decrease
+                newArr2 = copy.deepcopy(nowArr)
+                newArr2[0] -= 1
+                queue.append((nowCnt + 1, newArr2))
+    print(ret)
