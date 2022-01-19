@@ -17,7 +17,7 @@ def find(nodeNumber):
 def union(willParentNode, willChildNode):
     x = find(willParentNode);
     y = find(willChildNode);
-    
+    print(type(x));
     roots[y] = x;
 
 union(1,3);
